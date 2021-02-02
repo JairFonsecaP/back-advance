@@ -1,12 +1,12 @@
 const nodemailer = require("nodemailer");
 
 exports.send = async (req, res, next) => {
-  const { firstname, lastname, gender, email } = req.body;
+  const { firstname, lastname, gender, email } = req;
   switch (gender) {
-    case "0":
+    case "masculino":
       genero = "o";
       break;
-    case "1":
+    case "femenino":
       genero = "a";
       break;
     default:
