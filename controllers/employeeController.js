@@ -87,7 +87,7 @@ exports.activate = (req, res, next) => {
       (e, registro) => {
         if (e) {
           res.status(500).send({
-            message: "Error al actualizar el empleado",
+            message: "Error al actualizar el empleado.",
           });
         } else {
           res.status(200).json(registro);
