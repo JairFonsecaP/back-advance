@@ -1,3 +1,5 @@
+const MailController = require("./MailController");
+
 /* METODO QUE LISTA TODOS LOS USUARIOS*/
 exports.list = (req, res, next) => {
   req.getConnection((e, conn) => {
@@ -31,6 +33,7 @@ exports.add = (req, res, next) => {
         });
       } else {
         res.status(200).json(registro);
+        MailController.send(req.body);
       }
     });
   });
