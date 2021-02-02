@@ -7,12 +7,13 @@ const morgan = require("morgan");
 const mysql = require("mysql");
 const myConnection = require("express-myconnection");
 const config = require("./config/config");
-
+const cors = require("cors");
 /*INSTANCIANDO EXPRESS*/
 const app = express();
 
 app.use(morgan("dev"));
-
+/*SE USA CORS PARA PODER HACER PETICIONES CURZADAS*/
+app.use(cors());
 /*CONECCION A LA BASE DE DATOS*/
 app.use(myConnection(mysql, config, "single"));
 
