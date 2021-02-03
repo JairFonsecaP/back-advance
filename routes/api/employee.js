@@ -9,6 +9,7 @@ router.put("/update", employeeController.update);
 router.put("/activate", employeeController.activate);
 router.put("/deactivate", employeeController.deactivate);
 router.delete("/delete", employeeController.delete);
+router.get("/activatemail/:id", employeeController.activatemail);
 
 /*EXPORTAR TODAS LAS RUTAS GENERADAS DE EMPLOYEE*/
 module.exports = router;

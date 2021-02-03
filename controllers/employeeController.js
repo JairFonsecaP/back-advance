@@ -116,3 +116,23 @@ exports.deactivate = (req, res, next) => {
     );
   });
 };
+
+/*METODO QUE ACTIVA EL REGISTRO*/
+exports.activatemail = (req, res, next) => {
+  const employeeid = req.params.id;
+  req.getConnection((e, conn) => {
+    conn.query(
+      "UPDATE Employee SET status = 1 WHERE employeeid = ?",
+      [employeeid],
+      (e, registro) => {
+        if (e) {
+          res.status(500).send({
+            message: "Error al actualizar el empleado.",
+          });
+        } else {
+          res.status(200).json(registro);
+        }
+      }
+    );
+  });
+};
