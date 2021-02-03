@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 exports.send = async (req, res, next) => {
-  const { firstname, lastname, gender, email } = req;
+  const { firstname, lastname, gender, email, ruta } = req;
   switch (gender) {
     case "masculino":
       genero = "o";
@@ -59,7 +59,7 @@ exports.send = async (req, res, next) => {
         </p>
         <p style="margin-bottom: 30px">¡Adelanta tu pago cuando quieras!</p>
         <a
-          href="http://localhost:3000/api/employee/activate"
+          href="${ruta}"
           target="_blank"
           type="button"
           style="
