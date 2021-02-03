@@ -58,7 +58,7 @@ exports.update = (req, res, next) => {
 
 /* METODO PARA CREAR UN EMPLEADO*/
 exports.delete = (req, res, next) => {
-  const { employeeid } = req.body;
+  const employeeid = req.params.id;
 
   req.getConnection((e, conn) => {
     conn.query(
