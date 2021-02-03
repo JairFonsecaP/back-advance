@@ -62,7 +62,7 @@ exports.delete = (req, res, next) => {
 
   req.getConnection((e, conn) => {
     conn.query(
-      "DELETE FROM Employee WHERE employeeid =?",
+      "DELETE FROM Employee WHERE employeeid = ?",
       [employeeid],
       (e, registro) => {
         if (e) {
