@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 exports.send = async (req, res, next) => {
-  const { firstname, lastname, gender, email, url } = req;
+  const { firstname, lastname, gender, email, id } = req.body;
   switch (gender) {
     case "masculino":
       genero = "o";
@@ -14,6 +14,8 @@ exports.send = async (req, res, next) => {
       break;
   }
 
+  const url =
+    "https://back-crud-advance.herokuapp.com/api/employee/activatemail/" + id;
   const contentHTML = `
   <center>
     <table>
