@@ -82,8 +82,8 @@ exports.activate = (req, res, next) => {
   const datos = req.body;
   req.getConnection((e, conn) => {
     conn.query(
-      "UPDATE Employee SET status = 1 WHERE employeeid = ?, updated = ?",
-      [datos.employeeid, datos.updated],
+      "UPDATE Employee SET status = 1, updated = ? WHERE employeeid = ?",
+      [datos.updated, datos.employeeid],
       (e, registro) => {
         if (e) {
           res.status(500).send({
@@ -102,8 +102,8 @@ exports.deactivate = (req, res, next) => {
   const datos = req.body;
   req.getConnection((e, conn) => {
     conn.query(
-      "UPDATE Employee SET status = 0 WHERE employeeid = ?, updated = ?",
-      [datos.employeeid, datos.updated],
+      "UPDATE Employee SET status = 0 , updated = ? WHERE employeeid = ?",
+      [datos.updated, datos.employeeid],
       (e, registro) => {
         if (e) {
           res.status(500).send({
@@ -123,8 +123,8 @@ exports.activatemail = (req, res, next) => {
   const employeeid = req.params.id;
   req.getConnection((e, conn) => {
     conn.query(
-      "UPDATE Employee SET status = 1 WHERE employeeid = ?, updated = ?",
-      [employeeid, fecha],
+      "UPDATE Employee SET status = 1, updated = ? WHERE employeeid = ?",
+      [fecha, employeeid],
       (e, registro) => {
         if (e) {
           res.status(500).send({
