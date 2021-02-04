@@ -32,7 +32,7 @@ exports.add = (req, res, next) => {
   datos.created = getDate();
   console.log(datos);
   req.getConnection((e, conn) => {
-    conn.query("INSERT INTO Employee SET ", [datos], (e, registro) => {
+    conn.query("INSERT INTO Employee SET ?", [datos], (e, registro) => {
       if (e) {
         res.status(500).send({
           message: "Error al crear el usuario.",
