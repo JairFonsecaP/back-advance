@@ -27,10 +27,9 @@ const getDate = () => {
 };
 
 /* METODO PARA CREAR UN EMPLEADO*/
-exports.add = (req, res, next) => {
+exports.add = (req, res) => {
   const datos = req.body;
   datos.created = getDate();
-  console.log(datos);
   req.getConnection((e, conn) => {
     conn.query("INSERT INTO Employee SET ?", [datos], (e, registro) => {
       if (e) {
@@ -45,7 +44,7 @@ exports.add = (req, res, next) => {
 };
 
 // /* METODO PARA ACTUALIZAR LOS DATOS DE UN EMPLEADO*/
-exports.update = (req, res, next) => {
+exports.update = (req, res) => {
   const datos = req.body;
   datos.updated = getDate();
   req.getConnection((e, conn) => {
@@ -66,7 +65,7 @@ exports.update = (req, res, next) => {
 };
 
 /* METODO PARA CREAR UN EMPLEADO*/
-exports.delete = (req, res, next) => {
+exports.delete = (req, res) => {
   const employeeid = req.params.id;
 
   req.getConnection((e, conn) => {
@@ -87,7 +86,7 @@ exports.delete = (req, res, next) => {
 };
 
 /*METODO PARA ACTIVAR UN USUARIO*/
-exports.activate = (req, res, next) => {
+exports.activate = (req, res) => {
   const datos = req.body;
   datos.updated = getDate();
   req.getConnection((e, conn) => {
@@ -108,7 +107,7 @@ exports.activate = (req, res, next) => {
 };
 
 /*METODO PARA DESACTIVAR UN USUARIO*/
-exports.deactivate = (req, res, next) => {
+exports.deactivate = (req, res) => {
   const datos = req.body;
   datos.updated = getDate();
   req.getConnection((e, conn) => {
@@ -128,8 +127,8 @@ exports.deactivate = (req, res, next) => {
   });
 };
 
-/*METODO QUE ACTIVA EL REGISTRO*/
-exports.activatemail = (req, res, next) => {
+/*METODO QUE ACTIVA EL REGISTRO CUANTO EL USUARIO OPRIME EL BOTON DEL MAIL*/
+exports.activatemail = (req, res) => {
   const employeeid = req.params.id;
   const fecha = getDate();
   req.getConnection((e, conn) => {

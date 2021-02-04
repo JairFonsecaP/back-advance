@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 
-exports.send = async (req, res, next) => {
+/*DEFINE EL GENERO PARA HACER MAS PERSONALIZADO EL MAIL */
+exports.send = async (req, res) => {
   const { firstname, lastname, gender, email, id } = req.body;
   switch (gender) {
     case "masculino":
@@ -13,7 +14,7 @@ exports.send = async (req, res, next) => {
       genero = "o/a";
       break;
   }
-
+  /*DEFINE EL CORREO A ENVIAR */
   const url =
     "https://back-crud-advance.herokuapp.com/api/employee/activatemail/" + id;
   const contentHTML = `
@@ -190,6 +191,7 @@ exports.send = async (req, res, next) => {
       </table>
     </center>`;
 
+  /*DEFINE DESDE QUE MAIL SE ENVIARÁ EL MENSAJE */
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -197,14 +199,14 @@ exports.send = async (req, res, next) => {
       pass: "eQmG74AQSGyyLzS",
     },
   });
-
+  /*DEFINE DESDE DONDE SE ENVIARÁ EL MAIL Y HACIA DONDE, TAMBIÉN PONE EL CUERPO DEL MAIL PERVIAMENTE INSTANCIADO */
   const mailOptions = {
     from: "'activation-noreply' <activationmailadvance@gmail.com>",
     to: email,
     subject: "Activa tu cuenta",
     html: contentHTML,
   };
-
+  /*ENVIA EL MAIL */
   await transporter.sendMail(mailOptions, (e, info) => {
     if (e) {
       res.status(500).send({
