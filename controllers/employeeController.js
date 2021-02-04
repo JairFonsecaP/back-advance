@@ -20,11 +20,19 @@ exports.list = (req, res, next) => {
   });
 };
 
+/*METODO PARA GENERAR FECHAS */
+const getDate = () => {
+  const date = new Date();
+  return JSON.stringify(date);
+};
+
 /* METODO PARA CREAR UN EMPLEADO*/
 exports.add = (req, res, next) => {
   const datos = req.body;
+  datos.created = getDate();
+  console.log(datos);
   req.getConnection((e, conn) => {
-    conn.query("INSERT INTO Employee SET ?", [datos], (e, registro) => {
+    conn.query("INSERT INTO Employee SET ", [datos], (e, registro) => {
       if (e) {
         res.status(500).send({
           message: "Error al crear el usuario.",
@@ -39,6 +47,7 @@ exports.add = (req, res, next) => {
 // /* METODO PARA ACTUALIZAR LOS DATOS DE UN EMPLEADO*/
 exports.update = (req, res, next) => {
   const datos = req.body;
+  datos.updated = getDate();
   req.getConnection((e, conn) => {
     conn.query(
       "UPDATE Employee SET ? WHERE employeeid = ?",
@@ -80,6 +89,7 @@ exports.delete = (req, res, next) => {
 /*METODO PARA ACTIVAR UN USUARIO*/
 exports.activate = (req, res, next) => {
   const datos = req.body;
+  datos.updated = getDate();
   req.getConnection((e, conn) => {
     conn.query(
       "UPDATE Employee SET status = 1, updated = ? WHERE employeeid = ?",
@@ -100,6 +110,7 @@ exports.activate = (req, res, next) => {
 /*METODO PARA DESACTIVAR UN USUARIO*/
 exports.deactivate = (req, res, next) => {
   const datos = req.body;
+  datos.updated = getDate();
   req.getConnection((e, conn) => {
     conn.query(
       "UPDATE Employee SET status = 0 , updated = ? WHERE employeeid = ?",
@@ -119,8 +130,8 @@ exports.deactivate = (req, res, next) => {
 
 /*METODO QUE ACTIVA EL REGISTRO*/
 exports.activatemail = (req, res, next) => {
-  const fecha = new Date();
   const employeeid = req.params.id;
+  const fecha = getDate();
   req.getConnection((e, conn) => {
     conn.query(
       "UPDATE Employee SET status = 1, updated = ? WHERE employeeid = ?",
