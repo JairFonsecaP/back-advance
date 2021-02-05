@@ -18,29 +18,66 @@ exports.send = async (req, res) => {
   const url =
     "https://back-crud-advance.herokuapp.com/api/employee/activatemail/" + id;
   const contentHTML = `
-  <center>
-      <table>
-        <style>
-          @font-face {
-            font-family: "Nunito Sans";
-            font-style: normal;
-            font-weight: 300;
-            src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8WAc5tU1E.woff2)
-              format("woff2");
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-              U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
-              U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-          }
-        </style>
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      http-equiv="Content-Type"
+      content="text/html; charset=utf-8"
+    />
+    <title>Activate register</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @font-face {
+        font-family: "Nunito Sans";
+        font-style: normal;
+        font-weight: 300;
+        src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8WAc5tU1E.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        max-width: 600px;
+        font-family: "Nunito Sans";
+        font-style: normal;
+        font-weight: 100;
+      }
+      .header {
+        background-color: #06e2b3;
+        width: 100%;
+        text-align: center;
+      }
+      .botonActivar {
+        padding: 10px 50px;
+        background-color: #146fd1;
+        text-decoration: none;
+        color: #f9f9f9;
+        margin-bottom: 50px;
+      }
 
-        <div
-          style="
-            margin: 0;
-            padding: 0;
-            width: 600px;
-            font-family: 'Nunito Sans';
-          "
-        >
+      .copy {
+        font-family: Nunito Sans;
+        background-color: #f9f9f9;
+        width: 100%;
+        text-align: center;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body bgcolor="#fff">
+    <center>
+      <table>
+        <div>
           <div align="center">
             <img
               style="padding: 10px"
@@ -48,25 +85,13 @@ exports.send = async (req, res) => {
               alt="Logo"
             />
           </div>
-          <section
-            style="background-color: #06e2b3; width: 100%; text-align: center"
-          >
+          <section class="header">
             <p style="font-weight: bold; font-size: 25px">
               ${firstname + " " + lastname}, bienvenid${genero} a
               <br />#AdelantaTuPago!
             </p>
             <p style="margin-bottom: 30px">¡Adelanta tu pago cuando quieras!</p>
-            <a
-              href="${url}"
-              target="_blank"
-              type="button"
-              style="
-                padding: 10px 50px;
-                background-color: #146fd1;
-                text-decoration: none;
-                color: #f9f9f9;
-                margin-bottom: 50px;
-              "
+            <a href="${url}" target="_blank" type="button" class="botonActivar"
               >Activa tu cuenta ahora</a
             >
 
@@ -139,15 +164,7 @@ exports.send = async (req, res) => {
               </div>
             </div>
           </section>
-          <section
-            style="
-              font-family: Nunito Sans;
-              background-color: #f9f9f9;
-              width: 100%;
-              text-align: center;
-              padding-top: 20px;
-            "
-          >
+          <section class="copy">
             <p style="font-size: 12px">
               Este es un email automatizado, por favor no responder.
             </p>
@@ -189,7 +206,10 @@ exports.send = async (req, res) => {
           </section>
         </div>
       </table>
-    </center>`;
+    </center>
+  </body>
+</html>
+`;
 
   /*DEFINE DESDE QUE MAIL SE ENVIARÁ EL MENSAJE */
   const transporter = nodemailer.createTransport({
